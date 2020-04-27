@@ -24,7 +24,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
+<<<<<<< HEAD
 PROJECTNAME=ADC Driver.X
+=======
+PROJECTNAME=HAW.X
+>>>>>>> origin/master
 
 # Active Configuration
 DEFAULTCONF=default
