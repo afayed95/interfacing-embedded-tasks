@@ -19,11 +19,15 @@
 #include "DIO.h"
 #include "lcd.h"
 
+char message[] ="hello bro!";
+char st1[]="volt = ";
+char st2[]= "mv";
+char cl[]="    ";
 void ADC_init() 
 {
     ADMUX = 0x00; // Channel 0
-    SFIOR |=  (1<<ADTS1);
-    ADCSRA |= (1 << ADEN) |(1 << ADIE) | (1 << ADPS0) |(1 << ADPS2) | (1 << ADPS1) ;
+    //SFIOR |=  (1<<ADTS1);
+    ADCSRA |= (1 << ADEN) |(1 << ADIE) | (1 << ADPS2) |(1 << ADPS1) | (1 << ADPS0) ;
      // if i needed to put the pre scaler with f/128
 }
 void startConv() 
@@ -31,6 +35,11 @@ void startConv()
     ADCSRA |= (1 << ADSC);
 }
 
+void Selecting_channel(unsigned int channel )
+{
+    ADMUX &= ~(7<<0);  //00000111 11111000
+    ADMUX |= channel;  
+}
 int getADCdata() 
 {
    //Right adjustment
@@ -50,14 +59,31 @@ int getADCdataL()
 
 ISR(ADC_vect)
 {
+    static int state =0 ;
     char buffer[20];  
-    int data =getADCdata();
-    setPORTC(data);
-    setPORTD(data>>8);   
-    //_delay_ms(500); // i need to put delay here or set the pre scaler
+    int step =getADCdata();
+    setPORTC(step); //seting output on first 8 leds on PortC
+    setPORTD(step>>8);    // output on the last 2 leds on portD
+    //_delay_ms(500); // if need to put delay here to avoid flickering or set the pre scaler
+    int data=(step*5)/1.024;
     itoa(data,buffer,10);
-    LCD_String(buffer);
-    startConv();
+    
+    
+    if (state)
+    {
+        LCD_String_xy(1,7,cl);
+        LCD_String_xy(1,7,buffer);
+        startConv();
+        state=0;
+    }
+    else 
+    {
+        LCD_String_xy(0,7,cl);
+        LCD_String_xy(0,7,buffer);
+        startConv();
+        state=1;
+    }
+    _delay_ms(500);
 }
 
 
@@ -65,13 +91,19 @@ int main(void) {
     /* Replace with your application code */
     PORTCas(OUT);
     PORTDas(OUT);
-    
+        
     LCD_Init();
     ADC_init(); // input to trigger is  on ADC0
     
     sei();   //Global interrupt is ON
     startConv(); 
+    
+    LCD_String_xy(0, 0, st1);
+    LCD_String_xy(0, 13, st2);
+    LCD_String_xy(1, 0, st1);
+    LCD_String_xy(1, 13, st2);
    
-    while (1) {
+    while (1) 
+    {
     }
 }
