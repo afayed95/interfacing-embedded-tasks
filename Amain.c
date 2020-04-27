@@ -50,10 +50,13 @@ int getADCdataL()
 
 ISR(ADC_vect)
 {
+    char buffer[20];  
     int data =getADCdata();
     setPORTC(data);
     setPORTD(data>>8);   
     //_delay_ms(500); // i need to put delay here or set the pre scaler
+    itoa(data,buffer,10);
+    LCD_String(buffer);
     startConv();
 }
 
