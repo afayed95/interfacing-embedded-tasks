@@ -36,6 +36,7 @@ ISR(ADC_vect)
     PORTC |=OxFF;
 }
 
+
 int main(void) {
     sei();
     /* Replace with your application code */
