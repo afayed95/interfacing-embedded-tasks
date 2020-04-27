@@ -4,8 +4,6 @@
  *
  * Created on 27 ?????, 2020, 01:28 ?
  */
-
-
 #include <avr/io.h>
 #include <util/delay.h>
 
