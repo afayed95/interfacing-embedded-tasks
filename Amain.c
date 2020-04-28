@@ -19,10 +19,10 @@
 #include "DIO.h"
 #include "lcd.h"
 
-char message[] ="hello bro!";
-char st1[]="volt = ";
-char st2[]= "mv";
-char cl[]="    ";
+
+char str1[] = "Volt = ";
+char str2[] = " mV";
+char cl[] = "    ";
 
 void INT0_init() 
 {
@@ -32,10 +32,10 @@ void INT0_init()
 
 void ADC_init() 
 {
-    ADMUX = 0x00; // Channel 0
+    ADMUX = 0x41; // Channel 0
     SFIOR |=  (1<<ADTS1); //special function input output register 
     // SFIOR must be before ADCSRA !!!!!! 
-    ADCSRA |= (1 << ADEN) | (1<<ADATE) |(1 << ADIE) | (1 << ADPS2) |(1 << ADPS1) | (1 << ADPS0) ;
+    ADCSRA |= (1 << ADEN) |(1 << ADIE) |(1<<ADATE) | (1 << ADPS2) |(1 << ADPS1) | (1 << ADPS0) ;
      // if i needed to put the pre scaler with f/128
     //AADATE is auto trigger enable to connect between ADC and interrupt0
     //SFIOR |=  (1<<ADTS1); //special function input output register
@@ -45,12 +45,12 @@ void startConv()
     ADCSRA |= (1 << ADSC);
 }
 
-void Selecting_channel(unsigned int channel )
-{
-    
-    ADMUX &= ~(7<<0);  //00000111 11111000
-    ADMUX |= channel;  
-}
+//void Selecting_channel(unsigned int channel )
+//{
+//    
+//    ADMUX &= ~(7<<0);  //00000111 11111000
+//    ADMUX |= channel;  
+//}
 int getADCdata() 
 {
    //Right adjustment
@@ -70,31 +70,49 @@ int getADCdataL()
 
 ISR(ADC_vect)
 {
-    static int state =0 ;
+     int static state =1 ;
     char buffer[20];  
     int step =getADCdata();
-    setPORTC(step); //seting output on first 8 leds on PortC
-    setPORTD(step>>8);    // output on the last 2 leds on portD
+//    setPORTC(step); //seting output on first 8 leds on PortC
+//    setPORTD(step>>8);    // output on the last 2 leds on portD
     //_delay_ms(500); // if need to put delay here to avoid flickering or set the pre scaler
     int data=(step*5)/1.024;
     itoa(data,buffer,10);
     
-    
-    if (state)
+//        LCD_String_xy(0,7,cl); // clearing lcd to overwrite
+//        LCD_String_xy(0,7,buffer);// data after conversion from ADC
+    if (data>1000)
     {
-        LCD_String_xy(1,7,cl); // clearing lcd to overwrite
-        LCD_String_xy(1,7,buffer);  // data after conversion from ADC
-        startConv(); // infinite loop to start conversion right now !!
-        state=0;      // changing state to read from the other sensor
+        LCD_String_xy(0,7,cl); // clearing lcd to overwrite
+        LCD_String_xy(0,7,buffer);// data after conversion from ADC
+        setPINA(Relay);
+        setPINC(LED1);
+        if (state)
+        {
+         setPINA(Buzzer);
+        _delay_ms(1000);
+        resetPIN(Buzzer,1);
+        setPIND(LED2);
+        state=0;
+        }
+        //startConv();
+
+     //   startConv(); // infinite loop to start conversion right now !!
+              // changing state to read from the other sensor
     }
     else 
     {
-        LCD_String_xy(0,7,cl);
-        LCD_String_xy(0,7,buffer);
-        startConv();
-        state=1;
+        LCD_String_xy(0,7,cl); // clearing lcd to overwrite
+        LCD_String_xy(0,7,buffer);// data after conversion from ADC
+        resetPIN(Relay,1);
+        resetPIN(LED1,3);
+        resetPIN(LED2,4);  
+        //startConv();
+        
     }
-    _delay_ms(500);  // delay to adjust the ADC O/P
+    _delay_ms(500); // delay to adjust the ADC O/P
+   // startConv();
+
 }
 
 ISR(INT0_vect)
@@ -108,21 +126,24 @@ ISR(INT0_vect)
 }
 
 int main(void) {
-    /* Replace with your application code */
     PORTCas(OUT);
-    PORTDas(OUT);
+    //PORTDas(OUT);
+    PINDas(LED2,OUT);
+    PINDas(Button2,IN);
+    PINAas(Relay, OUT);
+    PINAas(LM35,IN);
+    //PINAas(Buzzer, OUT);
         
     LCD_Init(); //initializing the LCD
     ADC_init(); // input to trigger is  on ADC0 and ADC 1
-    INT0_init();//  setting interrupt int0  ON as well as adjusting interrupt on BUTTON2 
+   INT0_init();//  setting interrupt int0  ON as well as adjusting interrupt on BUTTON2 
     sei();   //Global interrupt is ON
-   // startConv();  it was set when Interrupt is triggered
     
-    LCD_String_xy(0, 0, st1);
-    LCD_String_xy(0, 13, st2);
-    LCD_String_xy(1, 0, st1);
-    LCD_String_xy(1, 13, st2);
-   
+    LCD_String_xy(0, 0, str1);
+    LCD_String_xy(0, 12, str2);
+       // startConv();  //it was set when Interrupt is triggered
+
+    
     while (1) 
     {
     }
