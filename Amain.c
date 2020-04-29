@@ -27,8 +27,15 @@ char cl[] = "    ";
 void Timer0_init()
 {
     TCCR0 |= (1<<CS02) | (1<<CS00) ; // SETTING WGM20 & WGM21 00 NORMAL 0XFF IS MAX AND NORMAL PORT OPERATION AND CLK/128
-    TIMSK |= (1<<TOIE0);
+    TIMSK |= (1<<TOIE0); //enable  normal mode interrupt for timer 0
 }
+void Timer0_init_CTC()
+{
+    TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0
+    OCR0 = 120;
+
+ }
 void INT0_init() 
 {
     MCUCR |= (1 << ISC01) | (1 << ISC00); // Rising Edge
@@ -129,27 +136,51 @@ ISR(INT0_vect)
         triggered=0; // set it to zero to confirm that I entered it once
     }
 }
-ISR(TIMER0_OVF_vect)
+//ISR(TIMER0_OVF_vect)
+//{
+//    static int x=1;
+//    if(x)
+//    {
+//        PORTC = 0x84; // setting leds 0 and 1 ON
+//        setPIND(LED2);// setting led 2 ON
+//        _delay_ms(1000);
+//        x=0;
+//
+//    }
+//    else
+//    {
+//        PORTC =0x00; // setting leds 0 and 1 OFF
+//        resetPIN(LED2,4); // Setting led2 OFF
+//                _delay_ms(1000);
+//
+//        x=1;
+//    }
+//}
+
+ISR (TIMER0_OVF_vect)
 {
+    static int interval_time=0;
     static int x=1;
-    if(x)
+    interval_time++;
+    if (interval_time==62) // x=f/1024 ,, x/255=62
     {
-        PORTC = 0x84; // setting leds 0 and 1 ON
+        // after one second do a task 
+        if (x)
+        {
+            PORTC = 0x84; // setting leds 0 and 1 ON
         setPIND(LED2);// setting led 2 ON
-        _delay_ms(500);
         x=0;
-
+        }
+        else 
+        {
+            PORTC =0x00; // setting leds 0 and 1 OFF
+            resetPIN(LED2,4); // Setting led2 OFF
+            x=1;
+        }
+     interval_time=0;   
     }
-    else
-    {
-        PORTC =0x00; // setting leds 0 and 1 OFF
-        resetPIN(LED2,4); // Setting led2 OFF
-                _delay_ms(500);
-
-        x=1;
     }
-}
-
+    
 int main(void) {
     PORTCas(OUT);
     //PORTDas(OUT);
@@ -163,6 +194,7 @@ int main(void) {
     ADC_init(); // input to trigger is  on ADC0 and ADC 1
    INT0_init();//  setting interrupt int0  ON as well as adjusting interrupt on BUTTON2
    Timer0_init(); // initializing the timer on normal operation
+
     sei();   //Global interrupt is ON
     
     LCD_String_xy(0, 0, str1);
