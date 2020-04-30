@@ -26,14 +26,19 @@ char cl[] = "    ";
 
 void Timer0_init()
 {
-    TCCR0 |= (1<<CS02) | (1<<CS00) ; // SETTING WGM20 & WGM21 00 NORMAL 0XFF IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    TCCR0 |= (1<<CS02) | (1<<CS00)(1<<COM00) ; // SETTING WGM20 & WGM21 00 NORMAL 0XFF IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    // COM00 .>> 1  COM01 >> 0 IS SET TO ADJUST THE OCO AS TOOGLE
+    // COM00 >> 1  COM01 >> 1 IS SET TO ADJUST THE OCO AS SET (ON) FOREVER
+    // COM00 >>0   COM01 >>1  IS TO CLEAR  FOREVER
     TIMSK |= (1<<TOIE0); //enable  normal mode interrupt for timer 0
+    DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
+    OCR0=0x80;  
 }
 void Timer0_init_CTC()
 {
     TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
     TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0
-    OCR0 = 120;
+    OCR0 = 0x00;;
 
  }
 void INT0_init() 
