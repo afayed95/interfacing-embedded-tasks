@@ -26,7 +26,7 @@ char cl[] = "    ";
 
 void Timer0_init()
 {
-    TCCR0 |= (1<<CS02) | (1<<CS00)(1<<COM00) ; // SETTING WGM20 & WGM21 00 NORMAL 0XFF IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    TCCR0 |= (1<<CS02) | (1<<CS00) |(1<<COM00) ; // SETTING WGM20 & WGM21 00 NORMAL 0XFF IS MAX AND NORMAL PORT OPERATION AND CLK/128
     // COM00 .>> 1  COM01 >> 0 IS SET TO ADJUST THE OCO AS TOOGLE
     // COM00 >> 1  COM01 >> 1 IS SET TO ADJUST THE OCO AS SET (ON) FOREVER
     // COM00 >>0   COM01 >>1  IS TO CLEAR  FOREVER
@@ -36,10 +36,18 @@ void Timer0_init()
 }
 void Timer0_init_CTC()
 {
-    TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
-    TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0
-    OCR0 = 0x00;;
+    TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01) | (1<<COM00); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0 FO COMPARE MATCH
+    OCR0 = 0x80;
+    DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
 
+ }
+void Timer0_init_fastPWM()
+{
+    TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01) | (1<<WGM00) | (1<<COM01); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
+    TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0 FO COMPARE MATCH
+    OCR0 = 0xC0;  // that means . 75 % duty cycle  // (192/256)*100
+    DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
  }
 void INT0_init() 
 {
@@ -134,12 +142,13 @@ ISR(ADC_vect)
 
 ISR(INT0_vect)
 {
-    static int triggered=1;
-    if(triggered)
-    {
-        startConv();
-        triggered=0; // set it to zero to confirm that I entered it once
-    }
+//    static int triggered=1;
+//    if(triggered)
+//    {
+//        startConv();
+//        triggered=0; // set it to zero to confirm that I entered it once
+//    }
+    OCR0+=20;
 }
 //ISR(TIMER0_OVF_vect)
 //{
@@ -185,6 +194,24 @@ ISR (TIMER0_OVF_vect)
      interval_time=0;   
     }
     }
+ISR(TIMER0_COMP_vect)
+{
+  // FOR COMPARE MATCH 
+    static int x=1;
+    if(x)
+    {
+        PORTC = 0x84; // setting leds 0 and 1 ON
+        setPIND(LED2);// setting led 2 ON
+        x=0;
+
+    }
+    else
+    {
+        PORTC =0x00; // setting leds 0 and 1 OFF
+        resetPIN(LED2,4); // Setting led2 OFF
+        x=1;
+    }
+}
     
 int main(void) {
     PORTCas(OUT);
@@ -198,7 +225,8 @@ int main(void) {
     LCD_Init(); //initializing the LCD
     ADC_init(); // input to trigger is  on ADC0 and ADC 1
    INT0_init();//  setting interrupt int0  ON as well as adjusting interrupt on BUTTON2
-   Timer0_init(); // initializing the timer on normal operation
+  // Timer0_init(); // initializing the timer on normal operation
+   Timer0_init_CTC(); // initializing the timer on compare match
 
     sei();   //Global interrupt is ON
     
