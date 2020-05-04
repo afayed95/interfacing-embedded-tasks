@@ -46,7 +46,7 @@ void Timer0_init_CTC()
 void Timer0_init_fastPWM()
 {
     TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01) | (1<<WGM00) | (1<<COM01); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
-    TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0 FO COMPARE MATCH
+    //TIMSK |=(1<<OCIE0); // ctc mode interrupt for timer0 FO COMPARE MATCH
     OCR0 = 0xC0;  // that means . 75 % duty cycle  // (192/256)*100
     DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
  }
