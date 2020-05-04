@@ -34,6 +34,7 @@ void Timer0_init()
     DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
     OCR0=0x80;  
 }
+
 void Timer0_init_CTC()
 {
     TCCR0 |= (1<<CS02) | (1<<CS00) | (1<<WGM01) | (1<<COM00); //SETTING WGM01 & WGM00 1 0 CTC MODE..CTC -OCSR IS MAX AND NORMAL PORT OPERATION AND CLK/128
@@ -49,6 +50,22 @@ void Timer0_init_fastPWM()
     OCR0 = 0xC0;  // that means . 75 % duty cycle  // (192/256)*100
     DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET 
  }
+void Timer0_init_PWM()
+{
+    TCCR0 |= (1<<CS02) | (1<<CS00)  | (1<<WGM00) | (1<<COM01); // f /1024.. pwm mode selection.. clear at oco at compare match upcount
+    OCR0 = 0x80;  
+    DDRB |= (1<<3); // MUST SET TO BE OUTPUT PIN ACCORDING DATA SHEET
+}
+void Timer_stop ()
+{
+    // stop the clock 
+    TCCR0 &= ((1<<CS00) | (1 <<CS01) | (1<<CS02));
+}
+void Timer_restart()
+{
+    // restarted it after stoping it
+    TCCR0 |= (1<<CS02) | (1<<CS00);
+}
 void INT0_init() 
 {
     MCUCR |= (1 << ISC01) | (1 << ISC00); // Rising Edge
@@ -203,7 +220,6 @@ ISR(TIMER0_COMP_vect)
         PORTC = 0x84; // setting leds 0 and 1 ON
         setPIND(LED2);// setting led 2 ON
         x=0;
-
     }
     else
     {
@@ -226,7 +242,8 @@ int main(void) {
     ADC_init(); // input to trigger is  on ADC0 and ADC 1
    INT0_init();//  setting interrupt int0  ON as well as adjusting interrupt on BUTTON2
   // Timer0_init(); // initializing the timer on normal operation
-   Timer0_init_CTC(); // initializing the timer on compare match
+  // Timer0_init_CTC(); // initializing the timer on compare match
+   Timer0_init_PWM();
 
     sei();   //Global interrupt is ON
     
