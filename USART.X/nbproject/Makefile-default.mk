@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../UART.X/Main.c ../../UART.X/mUart.c ../../UART.X/Timer.c ../../UART.X/lcd.c "../../ADC task1/First task ADC.X/DIO.c" MADCC.c
+SOURCEFILES_QUOTED_IF_SPACED=../../UART.X/Main.c ../../UART.X/mUart.c ../../UART.X/Timer.c ../../UART.X/lcd.c "../../ADC task1/First task ADC.X/DIO.c" ADC.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1773344296/Main.o ${OBJECTDIR}/_ext/1773344296/mUart.o ${OBJECTDIR}/_ext/1773344296/Timer.o ${OBJECTDIR}/_ext/1773344296/lcd.o ${OBJECTDIR}/_ext/894582462/DIO.o ${OBJECTDIR}/MADCC.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1773344296/Main.o.d ${OBJECTDIR}/_ext/1773344296/mUart.o.d ${OBJECTDIR}/_ext/1773344296/Timer.o.d ${OBJECTDIR}/_ext/1773344296/lcd.o.d ${OBJECTDIR}/_ext/894582462/DIO.o.d ${OBJECTDIR}/MADCC.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1773344296/Main.o ${OBJECTDIR}/_ext/1773344296/mUart.o ${OBJECTDIR}/_ext/1773344296/Timer.o ${OBJECTDIR}/_ext/1773344296/lcd.o ${OBJECTDIR}/_ext/894582462/DIO.o ${OBJECTDIR}/ADC.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1773344296/Main.o.d ${OBJECTDIR}/_ext/1773344296/mUart.o.d ${OBJECTDIR}/_ext/1773344296/Timer.o.d ${OBJECTDIR}/_ext/1773344296/lcd.o.d ${OBJECTDIR}/_ext/894582462/DIO.o.d ${OBJECTDIR}/ADC.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1773344296/Main.o ${OBJECTDIR}/_ext/1773344296/mUart.o ${OBJECTDIR}/_ext/1773344296/Timer.o ${OBJECTDIR}/_ext/1773344296/lcd.o ${OBJECTDIR}/_ext/894582462/DIO.o ${OBJECTDIR}/MADCC.o
+OBJECTFILES=${OBJECTDIR}/_ext/1773344296/Main.o ${OBJECTDIR}/_ext/1773344296/mUart.o ${OBJECTDIR}/_ext/1773344296/Timer.o ${OBJECTDIR}/_ext/1773344296/lcd.o ${OBJECTDIR}/_ext/894582462/DIO.o ${OBJECTDIR}/ADC.o
 
 # Source Files
-SOURCEFILES=../../UART.X/Main.c ../../UART.X/mUart.c ../../UART.X/Timer.c ../../UART.X/lcd.c ../../ADC task1/First task ADC.X/DIO.c MADCC.c
+SOURCEFILES=../../UART.X/Main.c ../../UART.X/mUart.c ../../UART.X/Timer.c ../../UART.X/lcd.c ../../ADC task1/First task ADC.X/DIO.c ADC.c
 
 
 
@@ -124,11 +124,11 @@ ${OBJECTDIR}/_ext/894582462/DIO.o: ../../ADC\ task1/First\ task\ ADC.X/DIO.c  nb
 	@${RM} ${OBJECTDIR}/_ext/894582462/DIO.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/894582462/DIO.o.d" -MT "${OBJECTDIR}/_ext/894582462/DIO.o.d" -MT ${OBJECTDIR}/_ext/894582462/DIO.o -o ${OBJECTDIR}/_ext/894582462/DIO.o "../../ADC task1/First task ADC.X/DIO.c" 
 	
-${OBJECTDIR}/MADCC.o: MADCC.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ADC.o: ADC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/MADCC.o.d 
-	@${RM} ${OBJECTDIR}/MADCC.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/MADCC.o.d" -MT "${OBJECTDIR}/MADCC.o.d" -MT ${OBJECTDIR}/MADCC.o -o ${OBJECTDIR}/MADCC.o MADCC.c 
+	@${RM} ${OBJECTDIR}/ADC.o.d 
+	@${RM} ${OBJECTDIR}/ADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ADC.o.d" -MT "${OBJECTDIR}/ADC.o.d" -MT ${OBJECTDIR}/ADC.o -o ${OBJECTDIR}/ADC.o ADC.c 
 	
 else
 ${OBJECTDIR}/_ext/1773344296/Main.o: ../../UART.X/Main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -161,11 +161,11 @@ ${OBJECTDIR}/_ext/894582462/DIO.o: ../../ADC\ task1/First\ task\ ADC.X/DIO.c  nb
 	@${RM} ${OBJECTDIR}/_ext/894582462/DIO.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/894582462/DIO.o.d" -MT "${OBJECTDIR}/_ext/894582462/DIO.o.d" -MT ${OBJECTDIR}/_ext/894582462/DIO.o -o ${OBJECTDIR}/_ext/894582462/DIO.o "../../ADC task1/First task ADC.X/DIO.c" 
 	
-${OBJECTDIR}/MADCC.o: MADCC.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ADC.o: ADC.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/MADCC.o.d 
-	@${RM} ${OBJECTDIR}/MADCC.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/MADCC.o.d" -MT "${OBJECTDIR}/MADCC.o.d" -MT ${OBJECTDIR}/MADCC.o -o ${OBJECTDIR}/MADCC.o MADCC.c 
+	@${RM} ${OBJECTDIR}/ADC.o.d 
+	@${RM} ${OBJECTDIR}/ADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ADC.o.d" -MT "${OBJECTDIR}/ADC.o.d" -MT ${OBJECTDIR}/ADC.o -o ${OBJECTDIR}/ADC.o ADC.c 
 	
 endif
 

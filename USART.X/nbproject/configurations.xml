@@ -10,7 +10,7 @@
       <itemPath>../../UART.X/Timer.h</itemPath>
       <itemPath>../../UART.X/lcd.h</itemPath>
       <itemPath>../../UART.X/mUart.h</itemPath>
-      <itemPath>mADCC.h</itemPath>
+      <itemPath>ADC.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,7 +24,7 @@
       <itemPath>../../UART.X/Timer.c</itemPath>
       <itemPath>../../UART.X/lcd.c</itemPath>
       <itemPath>../../ADC task1/First task ADC.X/DIO.c</itemPath>
-      <itemPath>MADCC.c</itemPath>
+      <itemPath>ADC.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -35,6 +35,7 @@
   <sourceRootList>
     <Elem>../../UART.X</Elem>
     <Elem>../../ADC task1/First task ADC.X</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

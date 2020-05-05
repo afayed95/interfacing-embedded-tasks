@@ -15,6 +15,7 @@
             <sourceRootList>
                 <sourceRootElem>../../UART.X</sourceRootElem>
                 <sourceRootElem>../../ADC task1/First task ADC.X</sourceRootElem>
+                <sourceRootElem>.</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
