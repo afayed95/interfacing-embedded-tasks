@@ -14,6 +14,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5</sourceRootElem>
+                <sourceRootElem>../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

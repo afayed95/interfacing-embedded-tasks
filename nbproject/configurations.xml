@@ -9,6 +9,7 @@
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/BoardConfig.h</itemPath>
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.h</itemPath>
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.h</itemPath>
+      <itemPath>../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,6 +22,7 @@
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/DIO.c</itemPath>
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.c</itemPath>
       <itemPath>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c</itemPath>
+      <itemPath>../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -30,6 +32,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5</Elem>
+    <Elem>../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

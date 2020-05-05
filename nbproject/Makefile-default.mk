@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Amain.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/DIO.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c
+SOURCEFILES_QUOTED_IF_SPACED=Amain.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/DIO.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c "../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Amain.o ${OBJECTDIR}/_ext/1188440888/DIO.o ${OBJECTDIR}/_ext/1188440888/lcd.o ${OBJECTDIR}/_ext/1188440888/timer.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Amain.o.d ${OBJECTDIR}/_ext/1188440888/DIO.o.d ${OBJECTDIR}/_ext/1188440888/lcd.o.d ${OBJECTDIR}/_ext/1188440888/timer.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Amain.o ${OBJECTDIR}/_ext/1188440888/DIO.o ${OBJECTDIR}/_ext/1188440888/lcd.o ${OBJECTDIR}/_ext/1188440888/timer.o ${OBJECTDIR}/_ext/1155236983/mTimer.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Amain.o.d ${OBJECTDIR}/_ext/1188440888/DIO.o.d ${OBJECTDIR}/_ext/1188440888/lcd.o.d ${OBJECTDIR}/_ext/1188440888/timer.o.d ${OBJECTDIR}/_ext/1155236983/mTimer.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Amain.o ${OBJECTDIR}/_ext/1188440888/DIO.o ${OBJECTDIR}/_ext/1188440888/lcd.o ${OBJECTDIR}/_ext/1188440888/timer.o
+OBJECTFILES=${OBJECTDIR}/Amain.o ${OBJECTDIR}/_ext/1188440888/DIO.o ${OBJECTDIR}/_ext/1188440888/lcd.o ${OBJECTDIR}/_ext/1188440888/timer.o ${OBJECTDIR}/_ext/1155236983/mTimer.o
 
 # Source Files
-SOURCEFILES=Amain.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/DIO.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c
+SOURCEFILES=Amain.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/DIO.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/lcd.c ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c ../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c
 
 
 
@@ -118,6 +118,12 @@ ${OBJECTDIR}/_ext/1188440888/timer.o: ../../../FirstProject-d872ea22371732fd211f
 	@${RM} ${OBJECTDIR}/_ext/1188440888/timer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/1188440888/timer.o.d" -MT "${OBJECTDIR}/_ext/1188440888/timer.o.d" -MT ${OBJECTDIR}/_ext/1188440888/timer.o -o ${OBJECTDIR}/_ext/1188440888/timer.o ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c 
 	
+${OBJECTDIR}/_ext/1155236983/mTimer.o: ../../Bashmonds\ Hossam\ drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1155236983" 
+	@${RM} ${OBJECTDIR}/_ext/1155236983/mTimer.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1155236983/mTimer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/1155236983/mTimer.o.d" -MT "${OBJECTDIR}/_ext/1155236983/mTimer.o.d" -MT ${OBJECTDIR}/_ext/1155236983/mTimer.o -o ${OBJECTDIR}/_ext/1155236983/mTimer.o "../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c" 
+	
 else
 ${OBJECTDIR}/Amain.o: Amain.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -142,6 +148,12 @@ ${OBJECTDIR}/_ext/1188440888/timer.o: ../../../FirstProject-d872ea22371732fd211f
 	@${RM} ${OBJECTDIR}/_ext/1188440888/timer.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1188440888/timer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/1188440888/timer.o.d" -MT "${OBJECTDIR}/_ext/1188440888/timer.o.d" -MT ${OBJECTDIR}/_ext/1188440888/timer.o -o ${OBJECTDIR}/_ext/1188440888/timer.o ../../../FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/FirstProject-d872ea22371732fd211f15ff776ef704cf3e25d5/timer.c 
+	
+${OBJECTDIR}/_ext/1155236983/mTimer.o: ../../Bashmonds\ Hossam\ drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1155236983" 
+	@${RM} ${OBJECTDIR}/_ext/1155236983/mTimer.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1155236983/mTimer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp=${DFP_DIR}  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/_ext/1155236983/mTimer.o.d" -MT "${OBJECTDIR}/_ext/1155236983/mTimer.o.d" -MT ${OBJECTDIR}/_ext/1155236983/mTimer.o -o ${OBJECTDIR}/_ext/1155236983/mTimer.o "../../Bashmonds Hossam drivers/Timer_Atmega32A-master/Timer_Atmega32A-master/mTimer.c" 
 	
 endif
 
