@@ -222,6 +222,9 @@ void setPIND(int pinNum) {
     PORTD |= (1 << pinNum);
 }
 
+
+<<<<<<< HEAD
+=======
 void togglePIND(int pinNum){
     PORTD ^= (1<<pinNum);
 }
@@ -231,6 +234,7 @@ void togglePINC(int pinNum){
 void togglePINB(int pinNum){
     PORTB ^= (1<<pinNum);
 }
+
 
 
 //void INT0_INIT()
@@ -250,4 +254,4 @@ void togglePINB(int pinNum){
 ////}
 
 
-
+>>>>>>> origin/master

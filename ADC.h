@@ -28,17 +28,20 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef XC_HEADER_TEMPLATE1_H
+#define	XC_HEADER_TEMPLATE2_H
 
- 
+#include <xc.h> // include processor files - each processor file is guarded.  
+void ADC_init();
 
-#include <xc.h> // include processor files - each processor file is guarded.
+void selectChannel(unsigned int channelNo);
+void startConv();
 
-void UART_init(int Baudrate);
-void transmit_char(char data);
-void transmit_string(char *data);
-void transmit_int(int value);
+
+int getADCdata();
+
+int getADCdataL();
+   
 
 // TODO Insert appropriate #include <>
 

@@ -30,10 +30,12 @@
 // more than once.  
 #ifndef DIO_H
 #define	DIO_H
+
 #define OUT    1
 #define IN     0
 
 
+<<<<<<< HEAD
 
 void _setPIN(int pinNum);
 
@@ -75,7 +77,7 @@ void setPIND(int pinNum);
 
 void RESETPORTC();
 void RESETPORTD();
-
+=======
 void _setPIN(int pinNum);
 
 void _resetPIN(int pinNum);
@@ -125,7 +127,7 @@ void togglePINB(int pinNum);
 //void INT0_INIT();
 //void INT1_INIT();
 //void INT2_INIT();
-
+>>>>>>> origin/master
 
 
 

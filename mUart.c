@@ -5,7 +5,8 @@
  * Created on 05 ????, 2020, 03:39 ?
  */
 
-#define F_CPU 16000000UL
+#define F_CPU 16000000 UL
+
 #include <xc.h>
 //#define F_CPU 8000000 UL
 #include <stdlib.h>
@@ -19,9 +20,7 @@
 //}
 void UART_init(int Baudrate)
 {
-   UCSRB |= (1<<TXEN) | (1<<UDRIE);// ENABLE TRANSMITTER.. ENABLE UDRE INTERRUPT
-   UCSRB |= (1<<RXEN); // ENable Receiver 
-   UCSRB |= (1<<RXCIE); // Enable RXC interrupt flag , preferably to deal with interrupt in case of recieve  
+   UCSRB |= (1<<TXEN) | (1<<UDRIE); // ENABLE TRANSMITTER.. ENABLE UDRE INTERRUPT
   // UBRRL =51; // calculated from    Baud rate and frequency of oscillation 
    int value =((F_CPU/(16.0*Baudrate))-1);
    UBRRL =(char)(value);// char because i want to access the first 8 bits only 
@@ -33,7 +32,7 @@ void transmit_char(char data)
     //Pooling Interrupt
       while(!(UCSRA & (1<<UDRE)));  // wait for flag
       // checking the flag of UDRE instead of using it as an interrupt, we will use it to write directly 
-    // but we have to check whether it is empty or not cause we cannot send data directly
+    // but we have to check whether it is empty or not cause e cannot send data directly
     // WHILE NOT TRUE IT IS FALSE THEN IT WILL BREAK OUT THE WHILE LOOP
     //For instance it is not empty, which means that UDRE is not empty then !false , 
     //it will be true , subsequently it will be in the loop         
@@ -51,28 +50,7 @@ void transmit_string(char* data)
 void transmit_int(int value)
 {
     //Pooling Interrupt
-    char buff[10];
-      itoa (value,buff,10);
+    int buff[10];
+      itoa(value,buff,10);
       transmit_string(buff);
 }
-
-void newline()
-{
-   char newline[]= "\t\r"; // adding new line to adjust our display 
-
-    transmit_string(newline);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
