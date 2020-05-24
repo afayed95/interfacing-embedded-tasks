@@ -28,107 +28,20 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef DIO_H
-#define	DIO_H
-#define OUT    1
-#define IN     0
+#ifndef Config_H
+#define	Config_H
 
 
-
-void _setPIN(int pinNum);
-
-void _resetPIN(int pinNum);
-
-// Data Direction Functions for PORT
-void PORTAas(int dir);
-void PORTBas(int dir);
-void PORTCas(int dir);
-void PORTDas(int dir);
-
-// Data Direction Functions for PINs
-void PINAas(int pinNum, int dir);
-void PINBas(int pinNum, int dir);
-void PINCas(int pinNum, int dir);
-void PINDas(int pinNum, int dir);
-
-void setPORTA(int data);
-void setPORTB(int data);
-void setPORTC(int data);
-void setPORTD(int data);
-
-int isPressedA(int pinNum);
-int isPressedB(int pinNum);
-int isPressedC(int pinNum);
-int isPressedD(int pinNum);
-
-void setPIN(int pinNum, char port);
-
-void resetPIN(int pinNum, char port);
-
-void setPINA(int pinNum);
-
-void setPINB(int pinNum);
-
-void setPINC(int pinNum);
-
-void setPIND(int pinNum);
-
-void RESETPORTC();
-void RESETPORTD();
-
-void _setPIN(int pinNum);
-
-void _resetPIN(int pinNum);
-
-// Data Direction Functions for PORT
-void PORTAas(int dir);
-void PORTBas(int dir);
-void PORTCas(int dir);
-void PORTDas(int dir);
-
-// Data Direction Functions for PINs
-void PINAas(int pinNum, int dir);
-void PINBas(int pinNum, int dir);
-void PINCas(int pinNum, int dir);
-void PINDas(int pinNum, int dir);
-
-void setPORTA(int data);
-void setPORTB(int data);
-void setPORTC(int data);
-void setPORTD(int data);
-
-int isPressedA(int pinNum);
-int isPressedB(int pinNum);
-int isPressedC(int pinNum);
-int isPressedD(int pinNum);
-
-void setPIN(int pinNum, char port);
-
-void resetPIN(int pinNum, char port);
-
-void setPINA(int pinNum);
-
-void setPINB(int pinNum);
-
-void setPINC(int pinNum);
-
-void setPIND(int pinNum);
-
-void togglePIND(int pinNum);
-void togglePINC(int pinNum);
-void togglePINB(int pinNum);
-
-
-
-
-
-//void INT0_INIT();
-//void INT1_INIT();
-//void INT2_INIT();
-
-
-
-
+#define LED0        2
+#define LED1        7
+#define LED2        3
+#define Buzzer      3
+#define Button0     0
+#define Button1     4
+#define Button2     2
+#define Servo       7
+#define LM35        1
+#define Relay       2
 
 
 #include <xc.h> // include processor files - each processor file is guarded.  
