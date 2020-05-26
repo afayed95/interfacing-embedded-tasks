@@ -11,70 +11,69 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#include "BoardConfig.h"
-#include "Config.h"
-#include "DIO.h"
-#include "ADC.h"
-#include "mUart.h"
-#include "mTimer.h"
-
+#define SS      4
+#define MOSI    5
+#define MISO    6
+#define SCK     7
 
 char newline[] = "\t\r"; // adding new line to adjust our dislay 
 char string[] = "Hello ya bro";
 char state1[] = "Led 1 is On \t\r"; // \t \r new line
 char state2[] = "Led 1 is OFF\t\r"; // \t \r new line
 
-
-//ISR(USART_UDRE_vect)  //  DOn't depend on interrupt in case of sending or trnasmitting
-//{
-//    UDR= 'A'; 
-//}
-
-ISR(USART_RXC_vect) {
-    char receive = UDR;
-    if (receive == 'T') // TOGGLE FOR EXAMPLE
-    {
-        {
-            PORTC ^= (1 << LED1);
-            if (isPressedC(LED1)) {
-                transmit_string(state1);
-            } else {
-                transmit_string(state2);
-            }
-
-            if (receive == 'O') {
-                PORTC |= (1 << LED1);
-                transmit_string(state1);
-                newline();
-            }
-            if (receive == 'F') {
-                PORTC &= ~(1 << LED1);
-                transmit_string(state2);
-                newline();
-
-            }
-        }
-
-        //          transmit_char('a');
-        //           transmit_string(string);       
-        _delay_ms(500); // cause without it it will send too much data 
-    }
+unsigned char counter=0;
+unsigned char data;
+    
+void SPI_Master_init() 
+{
+    // Data Direction Configuration
+    DDRB |= (1 << SS) | (1 << MOSI) | (1 << SCK);
+    SPCR |= (1 << SPE) | (1 << MSTR) | (1 << SPR1) | (1 << SPR0) | (1 << SPIE);
+}
+void SPI_Slave_init()
+{
+    // Data Direction Configuration
+    DDRB |= (1 << MISO);
+    SPCR |= (1 << SPE) | (1 << SPR1) | (1 << SPR0) | (1 << SPIE);
+}
+void SPI_write(char data)           //TX SPI 
+{
+    SPDR = data;
+    while (!(SPSR & (1 << SPIF)));
 }
 
+//char SPI_read()  // RX:SPI: replaced in main
+//{
+//    data = SPDR;
+//    return data;
+//}
 
-    int main(void) {
+//ISR(SPI_STC_vect)  //TX SPI replaced by pooling in the main
+//{
+//    SPI_write(counter++);
+//}
+
+//ISR(SPI_STC_vect)   //RX SPI : deleted and replaced by pooling in the main  
+//{
+//    PORTC = SPI_read();
+//}
+        int main(void) {
         /* Replace with your application code */
-        PINBas(Button0, IN);
-        PINCas(LED1, OUT);
-        PINDas(LED2, OUT);
-        UART_init(9600); // enable the UART ..Transmitter only 
-        //UDR= 'A'; // at least one time write it manually then once it is cleared it 'll enter automatically in the ISR 
-        // sei(); //Global Interrupt  to close it to send it once or from UDRIE
-       // SPI_init(Master , F_PS128);
+//        PINCas(LED1, OUT);
+//        PINDas(LED2, OUT);
+          DDRC |= 0XFF;  
+       // UART_init(9600); // enable the UART ..Transmitter only         
+        SPI_Master_init();
+        SPI_Slave_init();
+        SPI_write(counter); //at least one time to trigger the ISR of the SPI
         sei(); // enabling global interrupt
-
-
-        while (1) {
-
+        while (1) 
+        {
+            SPI_write(counter++);             // for master in SPI
+            _delay_ms(5000);
+             while (!(SPSR & (1 << SPIF)));     // for slave in SPI
+             PORTD =SPDR;
+            
+                    
         }
     }
